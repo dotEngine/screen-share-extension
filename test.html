@@ -17,21 +17,31 @@
 
 <script type='text/javascript'>
 
+let screen_constraints = {
+        mandatory: {
+            chromeMediaSource: 'desktop',
+            maxWidth: 1280,
+            maxHeight: 720
+        },
+        optional: []
+    };
+
 let extensionExist; 
 
 window.addEventListener('message', function(event) {
-    
+
     console.log(event)
 
     onMessageCallback(event.data);
 });
 
 
+
 function onMessageCallback(data) {
     // "cancel" button is clicked
     
     if (data == 'PermissionDeniedError') {
-        console.log(data)
+        alert('PermissionDeniedError');
     }
 
     // extension notified his presence
@@ -41,14 +51,23 @@ function onMessageCallback(data) {
 
     // extension shared temp sourceId 
 
-    console.log(data)
-
     if(data.sourceId){
-        console.log('get sourceId', data.souceId)
+        screen_constraints.mandatory.chromeMediaSourceId = data.sourceId;
+        getUserMedia(screen_constraints)
     }
 
 }
 
+function getUserMedia(constraints){
+     navigator.getUserMedia({video:constraints}, function (stream) {
+         var video = document.querySelector('video');
+         video.src = URL.createObjectURL(stream);
+         video.play();
+         console.log('video play')
+    }, function (error) {
+        console.error(error);
+    });
+}
 
 function getSourceId() {
     window.postMessage('get-sourceId', '*')
@@ -62,6 +81,9 @@ function checkExtension() {
 </head>
 
 <body>
+    <video controls autoplay width="320" height="240"></video>
+    <br/>
+
     <button onclick="getSourceId();">
         getSource 
     </button>
