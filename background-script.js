@@ -11,11 +11,6 @@ chrome.runtime.onConnect.addListener(function (port) {
         if(message == 'get-sourceId') {
             chrome.desktopCapture.chooseDesktopMedia(screenOptions, port.sender.tab, onAccessApproved);
         }
-
-        if(message == 'audio-plus-tab') {
-            screenOptions = ['screen', 'window', 'audio'];
-            chrome.desktopCapture.chooseDesktopMedia(screenOptions, port.sender.tab, onAccessApproved);
-        }
     }
 
     // on getting sourceId

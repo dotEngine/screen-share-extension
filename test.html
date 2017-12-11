@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+<title> dotEngine  </title>
+<style type="text/css">
+	.room {
+		cursor: pointer;
+	}
+	div.select {
+      display: inline-block;
+      margin: 0 0 1em 0;
+    }
+</style>
+
+
+<script type='text/javascript'>
+
+let extensionExist; 
+
+window.addEventListener('message', function(event) {
+    if (event.origin != window.location.origin) {
+        return;
+    }
+    console.log(event)
+
+    onMessageCallback(event.data);
+});
+
+
+function onMessageCallback(data) {
+    // "cancel" button is clicked
+    
+    if (data == 'PermissionDeniedError') {
+        console.log(data)
+    }
+
+    // extension notified his presence
+    if (data == 'extension-loaded') {
+        alert('extension-loaded')
+    }
+
+    // extension shared temp sourceId
+
+    if(data.sourceId){
+        console.log('get sourceId', data.souceId)
+    }
+
+}
+
+
+function getSourceId() {
+    window.postMessage('get-sourceId', '*')
+}
+
+function checkExtension() {
+    window.postMessage('are-you-there','*')
+}
+
+</script>
+</head>
+
+<body>
+    <button onclick="getSourceId();">
+        getSource 
+    </button>
+    <button onclick="checkExtension();">
+        checkExtension()
+    </button>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 {
-    "name" : "Screen Capturing",
+    "name" : "xiaobanke-screen-recorder",
     "author": "notedit",
     "version" : "1.0",
     "manifest_version" : 2,
@@ -14,7 +14,7 @@
        "js": [ "content-script.js" ],
        "all_frames": true,
        "run_at": "document_end",
-       "matches": ["https://xiaobanke.cc/*","https://xiaobanke.dot.cc/*"]
+       "matches": ["https://xiaobanke.cc/*","https://xiaobanke.dot.cc/*","file:///*","http://*/*","http://*/*"]
     }],
     "icons" : {
         "48" : "icon.png"

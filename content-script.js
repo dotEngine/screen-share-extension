@@ -32,7 +32,7 @@ window.addEventListener('message', function (event) {
     }
 
     // if it is something that need to be shared with background script
-    if(event.data == 'get-sourceId' || event.data === 'audio-plus-tab') {
+    if(event.data == 'get-sourceId' ) {
         // forward message to background script
         port.postMessage(event.data);
     }
