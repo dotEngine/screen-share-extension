@@ -20,9 +20,7 @@
 let extensionExist; 
 
 window.addEventListener('message', function(event) {
-    if (event.origin != window.location.origin) {
-        return;
-    }
+    
     console.log(event)
 
     onMessageCallback(event.data);
@@ -41,7 +39,9 @@ function onMessageCallback(data) {
         alert('extension-loaded')
     }
 
-    // extension shared temp sourceId
+    // extension shared temp sourceId 
+
+    console.log(data)
 
     if(data.sourceId){
         console.log('get sourceId', data.souceId)
